@@ -1,0 +1,42 @@
+@startuml
+
+title View/Subview Example - Class Diagram
+
+class Backbone.View
+class Backbone.Model
+class Backbone.Collection
+
+class SmallThing {
+  string value
+}
+
+class ThingCollection {
+    add()
+    each()
+}
+
+class SmallView {
+    DOM el
+    template(props)
+    initialize(options)
+    render()
+    handleClick()
+}
+
+class BigView {
+    DOM el
+    doAlert(subView)
+    render()
+}
+
+
+Backbone.Collection <|-down- ThingCollection: Inheritance
+Backbone.View <|-down- SmallView: Inheritance
+Backbone.View <|-down- BigView: Inheritance
+Backbone.Model <|-down- SmallThing: Inheritance
+
+BigView "1" *-up- "1" ThingCollection: Composition
+ThingCollection "1" *-up- "*" SmallThing: Composition
+SmallView "(model) 1" *-up- "1" SmallThing: Composition
+
+@enduml
